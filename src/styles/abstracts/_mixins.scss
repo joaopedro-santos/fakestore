@@ -1,0 +1,19 @@
+@use 'variables' as *;
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin container {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}

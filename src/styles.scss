@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+@use 'styles/abstracts/variables' as *;
+@use 'styles/abstracts/mixins' as *;
+@use 'styles/abstracts/breakpoints' as *;
+@use 'styles/base/reset';
+@use 'styles/base/typography';
+@use 'styles/theme/theme';
+
+:root {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: $color-text;
+  background-color: $color-surface;
+}
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: $color-surface;
+  color: $color-text;
+}
