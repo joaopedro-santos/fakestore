@@ -4,7 +4,10 @@
       <div class="mobile-overlay" (click)="closeMobileMenu()"></div>
     }
     <div class="container app-layout__header-content">
-      <a class="brand" [routerLink]="dashboardRoute" (click)="closeMobileMenu()">Fake Store</a>
+      <div class="brand-container" [routerLink]="dashboardRoute" (click)="closeMobileMenu()">
+        <img src="suzantur.png" alt="Suzantur Logo" srcset="" />
+        <div class="brand">Suzantur Store</div>
+      </div>
 
       <div class="header-controls">
         <div class="theme-switch" role="group" aria-label="Selecionar tema">

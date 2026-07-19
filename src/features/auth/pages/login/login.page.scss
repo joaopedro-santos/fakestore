@@ -42,19 +42,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 18px;
-  background: linear-gradient(
-    135deg,
-    var(--color-primary),
-    var(--color-primary-dark)
-  );
-  box-shadow: var(--shadow-soft);
   color: white;
 
-  mat-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 34px;
+  img {
+    width: 200px;
+    height: 48px;
+    object-fit: contain;
   }
 }
 
