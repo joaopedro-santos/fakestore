@@ -92,7 +92,29 @@ app-filters {
 }
 
 .header-search {
-  width: min(520px, 46vw);
+  width: min(540px, 46vw);
+}
+
+::ng-deep .header-search .mat-mdc-text-field-wrapper {
+  background: var(--color-surface-elevated) !important;
+}
+
+::ng-deep .header-search .mat-mdc-input-element {
+  color: var(--color-text) !important;
+  caret-color: var(--color-primary) !important;
+}
+
+::ng-deep .header-search .mat-mdc-input-element::placeholder {
+  color: var(--color-text-muted) !important;
+  opacity: 1;
+}
+
+::ng-deep .header-search .mdc-floating-label {
+  color: var(--color-text-muted) !important;
+}
+
+::ng-deep .header-search .mdc-floating-label--float-above {
+  color: var(--color-primary) !important;
 }
 
 ::ng-deep .header-search .mat-mdc-form-field-subscript-wrapper {
