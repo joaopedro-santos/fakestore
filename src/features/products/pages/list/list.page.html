@@ -1,0 +1,111 @@
+@if (viewModel$ | async; as viewModel) {
+  <mat-card-title>
+    <div class="page-title">
+      <div class="page-heading">
+        <p>Catálogo</p>
+        <span>Produtos</span>
+      </div>
+      <div class="header-actions">
+        <mat-form-field appearance="outline" class="header-search" subscriptSizing="dynamic">
+          <mat-label>Buscar por título</mat-label>
+          <input
+            matInput
+            [value]="viewModel.filters.title"
+            (input)="onTitleFilterChange(viewModel.filters, $any($event.target).value)"
+          />
+        </mat-form-field>
+
+        <a mat-flat-button color="primary" [routerLink]="createRoute">Novo produto</a>
+      </div>
+    </div>
+  </mat-card-title>
+  <mat-card-content>
+    <button
+      class="filters-toggle"
+      type="button"
+      aria-controls="products-filters"
+      [attr.aria-expanded]="mobileFiltersOpen()"
+      (click)="toggleMobileFilters()"
+    >
+      <svg
+        class="ui-search-icon ui-search-icon--filter"
+        viewBox="0 0 32 32"
+        fill="none"
+        data-testid="icon-filter_toolbar"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          d="M15.9 22h16.1v2h-16.1c-0.479 2.301-2.491 4.005-4.9 4.005s-4.42-1.704-4.894-3.973l-0.006-0.032h-6.1v-2h6.1c0.479-2.301 2.491-4.005 4.9-4.005s4.421 1.704 4.894 3.973l0.006 0.032zM18.1 8c0.48-2.301 2.491-4.005 4.9-4.005s4.421 1.704 4.894 3.973l0.006 0.032h4.1v2h-4.1c-0.48 2.301-2.491 4.005-4.9 4.005s-4.421-1.704-4.894-3.973l-0.006-0.033h-18.1v-2h18.1zM23 12c1.657 0 3-1.343 3-3s-1.343-3-3-3v0c-1.657 0-3 1.343-3 3s1.343 3 3 3v0zM11 26c1.657 0 3-1.343 3-3s-1.343-3-3-3v0c-1.657 0-3 1.343-3 3s1.343 3 3 3v0z"
+        ></path>
+      </svg>
+      <span>Filtro</span>
+    </button>
+
+    <div class="products-layout">
+      <aside
+        id="products-filters"
+        class="filters-sidebar"
+        [class.filters-sidebar--open]="mobileFiltersOpen()"
+      >
+        <app-filters
+          [filters]="viewModel.filters"
+          titleVisibility="mobile-only"
+          (filtersChange)="onFiltersChange($event)"
+        />
+      </aside>
+
+      <section class="products-content">
+        @if (viewModel.loading) {
+          <app-loading />
+        }
+
+        @if (viewModel.requestState === 'error') {
+          <div class="error-state">
+            <p>{{ viewModel.error }}</p>
+            <button mat-stroked-button type="button" (click)="onRetry()">Tentar novamente</button>
+          </div>
+        }
+
+        @if (!viewModel.loading && viewModel.empty) {
+          <app-empty-state
+            title="Nenhum produto encontrado"
+            description="Ajuste os filtros ou tente novamente."
+          />
+        }
+
+        @if (!viewModel.loading && !viewModel.empty) {
+          <div class="grid">
+            @for (product of viewModel.visibleProducts; track product.id) {
+              <app-product-card
+                [product]="product"
+                (editProduct)="onEditProduct($event)"
+                (deleteProduct)="onAskDelete($event)"
+              />
+            }
+          </div>
+        }
+
+        @if (!viewModel.loading && !viewModel.empty && viewModel.visibleProducts.length > 0) {
+          <app-pagination
+            [page]="viewModel.pagination.page"
+            [totalPages]="viewModel.pagination.totalPages"
+            (pageChange)="onPageChange($event)"
+          />
+        }
+      </section>
+    </div>
+
+  </mat-card-content>
+
+  @if (productToDelete) {
+    <div class="confirm-overlay" role="dialog" aria-modal="true" aria-label="Confirmar exclusão">
+      <app-confirm-dialog
+        title="Excluir produto"
+        message="Deseja excluir este produto?"
+        (confirm)="onConfirmDelete()"
+        (cancel)="onCancelDelete()"
+      />
+    </div>
+  }
+}

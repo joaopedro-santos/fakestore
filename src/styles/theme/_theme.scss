@@ -6,9 +6,24 @@
   --color-secondary: #{$color-secondary};
   --color-accent: #{$color-accent};
   --color-surface: #{$color-surface};
+  --color-surface-muted: #eef3fb;
+  --color-surface-elevated: #ffffff;
   --color-text: #{$color-text};
+  --color-text-strong: #020617;
   --color-text-muted: #{$color-text-muted};
   --color-border: #{$color-border};
+  --color-link: #1d4ed8;
+  --color-danger: #b91c1c;
+  --color-danger-strong: #991b1b;
+  --color-danger-soft: #fef2f2;
+  --color-danger-border: #fecaca;
+  --gradient-page: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --gradient-hero: linear-gradient(140deg, #eff6ff 0%, #f8fafc 55%, #ffffff 100%);
+  --gradient-login-accent: linear-gradient(135deg, #2563eb, #1d4ed8);
+  --gradient-not-found: radial-gradient(circle at top, #dbeafe 0%, #f8fafc 45%, #f1f5f9 100%);
+  --shadow-soft: 0 8px 20px rgba(15, 23, 42, 0.06);
+  --shadow-card: 0 12px 40px rgba(15, 23, 42, 0.12);
+  --shadow-elevated: 0 18px 40px rgba(15, 23, 42, 0.08);
 
   --spacing-xs: #{$spacing-xs};
   --spacing-sm: #{$spacing-sm};
@@ -19,4 +34,37 @@
   --radius-sm: #{$radius-sm};
   --radius-md: #{$radius-md};
   --radius-lg: #{$radius-lg};
+  --radius-button: var(--radius-md);
+}
+
+:root[data-theme='dark'],
+html[data-theme='dark'],
+body[data-theme='dark'],
+:root.theme-dark,
+:root.dark-theme,
+body.theme-dark,
+body.dark-theme {
+  --color-primary: #7aa6ff;
+  --color-primary-dark: #9087ff;
+  --color-secondary: #cdd8ff;
+  --color-accent: #f0b976;
+  --color-surface: #0b1120;
+  --color-surface-muted: #121a31;
+  --color-surface-elevated: #1a2340;
+  --color-text: #e7ecff;
+  --color-text-strong: #f3f6ff;
+  --color-text-muted: #9ca9d1;
+  --color-border: #2a3557;
+  --color-link: #a8beff;
+  --color-danger: #fb7185;
+  --color-danger-strong: #fda4af;
+  --color-danger-soft: #2b1626;
+  --color-danger-border: #64324b;
+  --gradient-page: linear-gradient(135deg, #090f1e 0%, #111930 48%, #1a2140 100%);
+  --gradient-hero: linear-gradient(140deg, #101833 0%, #1a2141 55%, #232a4d 100%);
+  --gradient-login-accent: linear-gradient(135deg, #4f7ee8, #6e59d9);
+  --gradient-not-found: radial-gradient(circle at top, #202b52 0%, #111932 45%, #0a1121 100%);
+  --shadow-soft: 0 8px 20px rgba(2, 6, 23, 0.45);
+  --shadow-card: 0 12px 40px rgba(2, 6, 23, 0.55);
+  --shadow-elevated: 0 18px 40px rgba(2, 6, 23, 0.5);
 }

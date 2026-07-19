@@ -1,0 +1,250 @@
+:host {
+  display: block;
+}
+
+.app-layout {
+  min-height: 100vh;
+  background: var(--color-surface);
+}
+
+.app-layout__header {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+}
+
+.app-layout__header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  min-height: 64px;
+}
+
+.header-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+}
+
+.theme-switch__button {
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  border-radius: var(--radius-button);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.theme-switch__button--active {
+  background: var(--color-surface-elevated);
+  color: var(--color-primary);
+}
+
+.app-layout__main {
+  padding: 1.5rem 0 2rem;
+}
+
+.brand {
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-strong);
+  transition: color 0.18s ease;
+}
+
+.brand:hover {
+  color: var(--color-link);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.main-nav a,
+.logout {
+  border: none;
+  background: transparent;
+  text-decoration: none;
+  color: var(--color-text);
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.main-nav a:hover,
+.logout:hover {
+  transform: translateY(-1px);
+  background: var(--color-surface-muted);
+}
+
+.main-nav a.is-active {
+  background: color-mix(in srgb, var(--color-primary) 22%, transparent);
+  color: var(--color-primary);
+}
+
+.logout {
+  color: var(--color-danger);
+}
+
+.logout:hover {
+  color: var(--color-danger-strong);
+}
+
+.menu-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface-elevated);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.menu-toggle span {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  background: var(--color-text-strong);
+  border-radius: 999px;
+  transition: all 0.25s ease;
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 14px;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 21px;
+}
+
+.menu-toggle span:nth-child(3) {
+  top: 28px;
+}
+
+.menu-toggle--open span:nth-child(1) {
+  top: 21px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle--open span:nth-child(3) {
+  top: 21px;
+  transform: rotate(-45deg);
+}
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(2, 6, 23, 0.55);
+
+  backdrop-filter: blur(6px);
+
+  z-index: 900;
+}
+
+.breadcrumbs {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumbs a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.current {
+  color: var(--color-text-strong);
+  font-weight: 600;
+}
+
+@media (max-width: 840px) {
+  .header-controls {
+    margin-left: auto;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1100;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 72px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    background: var(--color-surface-elevated);
+    box-shadow: var(--shadow-card);
+    transform: translateY(-16px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      transform 0.25s ease,
+      opacity 0.25s ease;
+
+    z-index: 1000;
+  }
+
+  .main-nav--open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .main-nav a,
+  .logout {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .main-nav a.is-active {
+    background: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  }
+}

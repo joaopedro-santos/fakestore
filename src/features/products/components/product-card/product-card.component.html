@@ -1,0 +1,11 @@
+<article class="product-card">
+  <img [src]="product.image" [alt]="product.title" />
+  <h3>{{ product.title }}</h3>
+  <p>{{ product.category }}</p>
+  <strong>{{ product.price | currency }}</strong>
+
+  <div class="actions">
+    <button mat-stroked-button type="button" (click)="editProduct.emit(product)">Editar</button>
+    <button mat-button type="button" class="danger" (click)="deleteProduct.emit(product)">Excluir</button>
+  </div>
+</article>

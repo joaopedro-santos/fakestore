@@ -6,8 +6,7 @@ export const authGuard: CanActivateFn = () => {
   const sessionService = inject(SessionService);
   const router = inject(Router);
 
-  // Placeholder for future protected-route logic.
-  if (sessionService.isAuthenticated()) {
+  if (sessionService.hasValidSession()) {
     return true;
   }
 

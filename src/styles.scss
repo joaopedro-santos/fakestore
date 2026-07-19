@@ -5,11 +5,12 @@
 @use 'styles/base/reset';
 @use 'styles/base/typography';
 @use 'styles/theme/theme';
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
-  color: $color-text;
-  background-color: $color-surface;
+  font-family: "Inter", sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-surface);
 }
 
 html {
@@ -29,13 +30,27 @@ html {
 body {
   min-height: 100%;
   margin: 0;
-  background: $color-surface;
-  color: $color-text;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+button,
+.mat-mdc-button-base,
+a[mat-button],
+a[mat-flat-button],
+a[mat-stroked-button],
+a[mat-raised-button],
+button[mat-button],
+button[mat-flat-button],
+button[mat-stroked-button],
+button[mat-raised-button],
+button[mat-icon-button] {
+  border-radius: var(--radius-button) !important;
 }
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1380px;
   margin: 0 auto;
   padding-inline: 1rem;
 }

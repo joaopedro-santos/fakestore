@@ -1,0 +1,45 @@
+<section class="filters" role="search">
+  @if (titleVisibility !== 'hidden') {
+    <mat-form-field
+      appearance="outline"
+      class="title-filter"
+      [class.title-filter--mobile-only]="titleVisibility === 'mobile-only'"
+    >
+      <mat-label>Buscar por título</mat-label>
+      <input matInput [value]="filters.title" (input)="onTitleChange($any($event.target).value)" />
+    </mat-form-field>
+  }
+
+  <mat-form-field appearance="outline">
+    <mat-label>Categoria</mat-label>
+    <mat-select [value]="filters.category" (selectionChange)="onCategoryChange($event.value)">
+      <mat-option [value]="null">Todas</mat-option>
+      <mat-option value="electronics">Electronics</mat-option>
+      <mat-option value="jewelery">Jewelery</mat-option>
+      <mat-option value="men's clothing">Men's clothing</mat-option>
+      <mat-option value="women's clothing">Women's clothing</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Preço mínimo</mat-label>
+    <input
+      matInput
+      appCurrencyMask
+      inputmode="decimal"
+      [value]="filters.minPrice ?? ''"
+      (numericValueChange)="onMinPriceChange($event)"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Preço máximo</mat-label>
+    <input
+      matInput
+      appCurrencyMask
+      inputmode="decimal"
+      [value]="filters.maxPrice ?? ''"
+      (numericValueChange)="onMaxPriceChange($event)"
+    />
+  </mat-form-field>
+</section>

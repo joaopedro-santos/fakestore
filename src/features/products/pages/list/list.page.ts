@@ -1,23 +1,96 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Router, RouterLink } from '@angular/router';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
+import { ProductFacade } from '../../facade/product.facade';
+import { EmptyStateComponent } from '../../../../shared/components/empty-state/empty-state.component';
+import { FiltersComponent, FilterState } from '../../../../shared/components/filters/filters.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
+import { Product } from '../../models/product.model';
+import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ROUTES } from '../../../../core/constants/routes.constants';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-list-page',
-  template: `
-    <section class="page-card">
-      <h2>Produtos</h2>
-      <p>Lista de produtos em construção.</p>
-    </section>
-  `,
-  styles: [
-    `
-      .page-card {
-        padding: 2rem;
-        border-radius: var(--radius-lg);
-        background: white;
-        box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
-      }
-    `,
-  ],
+  standalone: true,
+  imports: [AsyncPipe, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, RouterLink, ProductCardComponent, EmptyStateComponent, FiltersComponent, LoadingComponent, PaginationComponent, ConfirmDialogComponent],
+  templateUrl: './list.page.html',
+  styleUrl: './list.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListPage {}
+export class ListPage implements OnInit {
+  private readonly productFacade = inject(ProductFacade);
+  private readonly router = inject(Router);
+  private readonly notificationService = inject(NotificationService);
+
+  protected readonly viewModel$ = this.productFacade.viewModel$;
+  protected readonly createRoute = `/${ROUTES.PRODUCTS.ROOT}/${ROUTES.PRODUCTS.CREATE}`;
+  protected readonly mobileFiltersOpen = signal(false);
+  protected productToDelete: Product | null = null;
+
+  public ngOnInit(): void {
+    this.productFacade.loadProducts();
+  }
+
+  protected onFiltersChange(filters: FilterState): void {
+    this.productFacade.applyFilters({
+      title: filters.title,
+      category: filters.category,
+      minPrice: filters.minPrice,
+      maxPrice: filters.maxPrice,
+    });
+  }
+
+  protected onTitleFilterChange(filters: FilterState, title: string): void {
+    this.onFiltersChange({
+      ...filters,
+      title,
+    });
+  }
+
+  protected toggleMobileFilters(): void {
+    this.mobileFiltersOpen.update((isOpen) => !isOpen);
+  }
+
+  protected onPageChange(page: number): void {
+    this.productFacade.changePage(page);
+  }
+
+  protected onRetry(): void {
+    this.productFacade.retry();
+  }
+
+  protected onEditProduct(product: Product): void {
+    this.router.navigate([`/${ROUTES.PRODUCTS.ROOT}/${product.id}/edit`]);
+  }
+
+  protected onAskDelete(product: Product): void {
+    this.productToDelete = product;
+  }
+
+  protected onCancelDelete(): void {
+    this.productToDelete = null;
+  }
+
+  protected onConfirmDelete(): void {
+    if (!this.productToDelete) {
+      return;
+    }
+
+    this.productFacade.deleteProduct(this.productToDelete.id).subscribe({
+      next: () => {
+        this.notificationService.success('Produto removido com sucesso.');
+        this.productToDelete = null;
+      },
+      error: () => {
+        this.notificationService.error('Não foi possível remover o produto.');
+      },
+    });
+  }
+}

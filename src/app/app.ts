@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ThemeService } from '../core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,11 @@ import { RouterOutlet } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
+  private readonly themeService = inject(ThemeService);
+
   protected readonly title = signal('suzantur-products');
+
+  constructor() {
+    this.themeService.initialize();
+  }
 }

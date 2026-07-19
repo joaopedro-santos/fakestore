@@ -1,0 +1,10 @@
+<mat-card-content>
+  @if (product$ | async; as product) {
+    <app-product-form [product]="product" (submitForm)="onSubmit(product.id, $event)" />
+  } @else {
+    <app-loading />
+  }
+</mat-card-content>
+<mat-card-actions>
+  <a mat-button [routerLink]="['/' + productsRoute]">Voltar</a>
+</mat-card-actions>

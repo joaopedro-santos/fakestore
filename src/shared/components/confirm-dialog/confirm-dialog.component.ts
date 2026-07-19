@@ -1,26 +1,16 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-dialog',
-  template: `
-    <section class="confirm-dialog">
-      <h3>{{ title }}</h3>
-      <p>{{ message }}</p>
-    </section>
-  `,
-  styles: [
-    `
-      .confirm-dialog {
-        padding: 1.5rem;
-        border-radius: var(--radius-md);
-        background: white;
-        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-      }
-    `,
-  ],
+  standalone: true,
+  templateUrl: './confirm-dialog.component.html',
+  styleUrl: './confirm-dialog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogComponent {
   @Input() public title: string = 'Confirmar ação';
   @Input() public message: string = 'Deseja continuar?';
+
+  @Output() public readonly confirm = new EventEmitter<void>();
+  @Output() public readonly cancel = new EventEmitter<void>();
 }

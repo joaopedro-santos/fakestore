@@ -1,0 +1,7 @@
+
+  <mat-card-content>
+    <app-product-form (submitForm)="onSubmit($event)" />
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-button [routerLink]="['/' + productsRoute]">Voltar</a>
+  </mat-card-actions>

@@ -2,23 +2,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-empty-state',
-  template: `
-    <section class="empty-state">
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
-    </section>
-  `,
-  styles: [
-    `
-      .empty-state {
-        padding: 2rem;
-        text-align: center;
-        border: 1px dashed var(--color-border);
-        border-radius: var(--radius-md);
-        color: var(--color-text-muted);
-      }
-    `,
-  ],
+  standalone: true,
+  templateUrl: './empty-state.component.html',
+  styleUrl: './empty-state.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmptyStateComponent {

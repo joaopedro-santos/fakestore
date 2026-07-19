@@ -1,0 +1,48 @@
+<section class="dashboard">
+  <header class="dashboard__hero">
+    <p class="dashboard__eyebrow">Painel principal</p>
+    <h1>Bem-vindo ao Fake Store Manager</h1>
+    <p>Gerencie produtos de forma centralizada com filtros, paginação e operações em tempo real.</p>
+  </header>
+
+  @if (stats$ | async; as stats) {
+    <div class="dashboard__stats">
+      <mat-card class="stat-card">
+        <p class="stat-card__label">Total de produtos</p>
+        <strong class="stat-card__value">{{ stats.totalProducts }}</strong>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <p class="stat-card__label">Categorias disponíveis</p>
+        <strong class="stat-card__value">{{ stats.availableCategories }}</strong>
+      </mat-card>
+
+      <mat-card class="stat-card">
+        <p class="stat-card__label">Último produto criado</p>
+        <strong class="stat-card__value stat-card__value--truncate">{{ stats.lastProductTitle }}</strong>
+      </mat-card>
+    </div>
+  }
+
+  <div class="dashboard__actions">
+    <mat-card class="action-card">
+      <mat-card-title>Catálogo de produtos</mat-card-title>
+      <mat-card-content>
+        Consulte, filtre, edite e exclua os itens do catálogo em uma única tela.
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-flat-button color="primary" [routerLink]="productsRoute">Ir para produtos</a>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="action-card">
+      <mat-card-title>Novo produto</mat-card-title>
+      <mat-card-content>
+        Cadastre um novo item e visualize imediatamente a atualização no estado local.
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-stroked-button [routerLink]="createProductRoute">Criar produto</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</section>

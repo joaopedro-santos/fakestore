@@ -1,21 +1,31 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
-  public showSuccess(message: string): void {
-    // Placeholder for future toast implementation.
-    console.info(message);
+  private readonly defaultConfig: MatSnackBarConfig = {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'bottom',
+  };
+
+  constructor(private readonly snackBar: MatSnackBar) {}
+
+  public success(message: string): void {
+    this.snackBar.open(message, 'Fechar', { ...this.defaultConfig, panelClass: ['snack-success'] });
   }
 
-  public showError(message: string): void {
-    // Placeholder for future toast implementation.
-    console.error(message);
+  public error(message: string): void {
+    this.snackBar.open(message, 'Fechar', { ...this.defaultConfig, panelClass: ['snack-error'] });
   }
 
-  public showInfo(message: string): void {
-    // Placeholder for future toast implementation.
-    console.info(message);
+  public warning(message: string): void {
+    this.snackBar.open(message, 'Fechar', { ...this.defaultConfig, panelClass: ['snack-warning'] });
+  }
+
+  public info(message: string): void {
+    this.snackBar.open(message, 'Fechar', { ...this.defaultConfig, panelClass: ['snack-info'] });
   }
 }

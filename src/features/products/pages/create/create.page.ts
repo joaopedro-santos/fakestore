@@ -1,23 +1,37 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { Router, RouterLink } from '@angular/router';
+import { ProductFormComponent } from '../../components/product-form/product-form.component';
+import { ProductFacade } from '../../facade/product.facade';
+import { CreateProductRequest } from '../../models/create-product-request.model';
+import { ROUTES } from '../../../../core/constants/routes.constants';
+import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-create-page',
-  template: `
-    <section class="page-card">
-      <h2>Criar produto</h2>
-      <p>Área de criação futura.</p>
-    </section>
-  `,
-  styles: [
-    `
-      .page-card {
-        padding: 2rem;
-        border-radius: var(--radius-lg);
-        background: white;
-        box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
-      }
-    `,
-  ],
+  standalone: true,
+  imports: [MatButtonModule, MatCardModule, ProductFormComponent, RouterLink],
+  templateUrl: './create.page.html',
+  styleUrl: './create.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreatePage {}
+export class CreatePage {
+  private readonly productFacade = inject(ProductFacade);
+  private readonly router = inject(Router);
+  private readonly notificationService = inject(NotificationService);
+
+  protected readonly productsRoute = ROUTES.PRODUCTS.ROOT;
+
+  protected onSubmit(payload: CreateProductRequest): void {
+    this.productFacade.createProduct(payload).subscribe({
+      next: () => {
+        this.notificationService.success('Produto criado com sucesso.');
+        this.router.navigate([`/${ROUTES.PRODUCTS.ROOT}`]);
+      },
+      error: () => {
+        this.notificationService.error('Não foi possível criar o produto.');
+      },
+    });
+  }
+}

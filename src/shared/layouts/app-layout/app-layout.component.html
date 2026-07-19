@@ -1,0 +1,88 @@
+<div class="app-layout">
+  <header class="app-layout__header">
+    @if (menuOpen()) {
+      <div class="mobile-overlay" (click)="closeMobileMenu()"></div>
+    }
+    <div class="container app-layout__header-content">
+      <a class="brand" [routerLink]="dashboardRoute" (click)="closeMobileMenu()">Fake Store</a>
+
+      <div class="header-controls">
+        <div class="theme-switch" role="group" aria-label="Selecionar tema">
+          <button
+            type="button"
+            class="theme-switch__button"
+            [class.theme-switch__button--active]="activeTheme() === 'light'"
+            [attr.aria-pressed]="activeTheme() === 'light'"
+            (click)="setTheme('light')"
+          >
+            🔆
+          </button>
+
+          <button
+            type="button"
+            class="theme-switch__button"
+            [class.theme-switch__button--active]="activeTheme() === 'dark'"
+            [attr.aria-pressed]="activeTheme() === 'dark'"
+            (click)="setTheme('dark')"
+          >
+            🌑
+          </button>
+        </div>
+
+        <button
+          type="button"
+          class="menu-toggle"
+          [class.menu-toggle--open]="menuOpen()"
+          [attr.aria-expanded]="menuOpen()"
+          aria-controls="main-navigation"
+          (click)="toggleMobileMenu()"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav
+        id="main-navigation"
+        class="main-nav"
+        [class.main-nav--open]="menuOpen()"
+        aria-label="Navegação principal"
+      >
+        <a
+          [routerLink]="dashboardRoute"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeMobileMenu()"
+        >
+          Dashboard
+        </a>
+
+        <a [routerLink]="productsRoute" routerLinkActive="is-active" (click)="closeMobileMenu()">
+          Produtos
+        </a>
+
+        <button type="button" class="logout" (click)="logout()">[← Sair</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app-layout__main">
+    <div class="container">
+      @if (breadcrumbs$ | async; as breadcrumbs) {
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          @for (item of breadcrumbs; track item.url) {
+            @if (!item.current) {
+              <a [routerLink]="item.url">{{ item.label }}</a>
+              <span aria-hidden="true">/</span>
+            } @else {
+              <span class="current">{{ item.label }}</span>
+            }
+          }
+        </nav>
+      }
+
+      <router-outlet />
+    </div>
+  </main>
+</div>

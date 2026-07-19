@@ -1,0 +1,66 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="card-header">
+      <div class="card-logo">
+        <mat-icon>storefront</mat-icon>
+      </div>
+
+      <h1>Fake Store Manager</h1>
+
+      <p>
+        Entre com suas credenciais para acessar a plataforma.
+      </p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Usuário</mat-label>
+
+        <input matInput formControlName="username" />
+
+        <mat-icon matSuffix>person</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Senha</mat-label>
+
+        <input
+          matInput
+          [type]="hidePassword() ? 'password' : 'text'"
+          formControlName="password"
+        />
+
+        <button
+          type="button"
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword.set(!hidePassword())"
+        >
+          <mat-icon>
+            {{ hidePassword() ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+
+      @if (error()) {
+        <div class="error-box">
+          {{ error() }}
+        </div>
+      }
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="login-button"
+        type="submit"
+        [disabled]="form.invalid || loading()"
+      >
+        @if (loading()) {
+          <mat-spinner diameter="22"></mat-spinner>
+        } @else {
+          Entrar
+        }
+      </button>
+    </form>
+  </mat-card>
+</div>

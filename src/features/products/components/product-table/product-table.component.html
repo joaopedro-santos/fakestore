@@ -1,0 +1,23 @@
+<table class="product-table">
+  <thead>
+    <tr>
+      <th>Título</th>
+      <th>Categoria</th>
+      <th>Preço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (product of products; track product.id) {
+      <tr>
+        <td>{{ product.title }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price | currency }}</td>
+        <td>
+          <button type="button" (click)="edit.emit(product)">Editar</button>
+          <button type="button" (click)="delete.emit(product)">Excluir</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

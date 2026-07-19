@@ -1,0 +1,70 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="product-form">
+  <mat-form-field appearance="outline">
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Preço</mat-label>
+    <input matInput appCurrencyMask formControlName="price" inputmode="decimal" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descrição</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Categoria</mat-label>
+    <mat-select formControlName="category">
+      @if (categoriesLoading$ | async) {
+        <mat-option disabled>Carregando categorias...</mat-option>
+      } @else {
+        @if (categories$ | async; as categories) {
+          @for (category of categories; track category) {
+            <mat-option [value]="category">{{ category }}</mat-option>
+          }
+        }
+      }
+    </mat-select>
+  </mat-form-field>
+
+  @if (categoriesError$ | async; as categoriesError) {
+    <div class="categories-error">
+      <span>{{ categoriesError }}</span>
+      <button mat-button type="button" (click)="reloadCategories()">Tentar novamente</button>
+    </div>
+  }
+
+  <section class="image-upload" aria-label="Upload de imagem">
+  <label for="product-image" class="image-upload__label">
+    Imagem do produto
+  </label>
+
+  <input
+    id="product-image"
+    type="file"
+    accept="image/*"
+    (change)="onImageSelected($event)"
+  />
+
+  @if (imagePreview()) {
+    <div class="image-preview">
+      <img
+        [src]="imagePreview()"
+        alt="Pré-visualização da imagem"
+      />
+
+      <button
+        mat-stroked-button
+        type="button"
+        (click)="removeImage()"
+      >
+        Remover imagem
+      </button>
+    </div>
+  }
+</section>
+
+  <button mat-flat-button color="primary" type="submit" [disabled]="form.invalid">Salvar</button>
+</form>

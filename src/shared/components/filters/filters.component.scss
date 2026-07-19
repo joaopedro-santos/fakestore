@@ -1,0 +1,15 @@
+.filters {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.title-filter--mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .title-filter--mobile-only {
+    display: block;
+  }
+}
