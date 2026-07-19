@@ -12,14 +12,12 @@ import { FiltersComponent, FilterState } from '../../../../shared/components/fil
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { PaginationComponent } from '../../../../shared/components/pagination/pagination.component';
 import { Product } from '../../models/product.model';
-import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ROUTES } from '../../../../core/constants/routes.constants';
-import { NotificationService } from '../../../../core/services/notification.service';
 
 @Component({
   selector: 'app-list-page',
   standalone: true,
-  imports: [AsyncPipe, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, RouterLink, ProductCardComponent, EmptyStateComponent, FiltersComponent, LoadingComponent, PaginationComponent, ConfirmDialogComponent],
+  imports: [AsyncPipe, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, RouterLink, ProductCardComponent, EmptyStateComponent, FiltersComponent, LoadingComponent, PaginationComponent],
   templateUrl: './list.page.html',
   styleUrl: './list.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,12 +25,10 @@ import { NotificationService } from '../../../../core/services/notification.serv
 export class ListPage implements OnInit {
   private readonly productFacade = inject(ProductFacade);
   private readonly router = inject(Router);
-  private readonly notificationService = inject(NotificationService);
 
   protected readonly viewModel$ = this.productFacade.viewModel$;
   protected readonly createRoute = `/${ROUTES.PRODUCTS.ROOT}/${ROUTES.PRODUCTS.CREATE}`;
   protected readonly mobileFiltersOpen = signal(false);
-  protected productToDelete: Product | null = null;
 
   public ngOnInit(): void {
     this.productFacade.loadProducts();
@@ -66,31 +62,7 @@ export class ListPage implements OnInit {
     this.productFacade.retry();
   }
 
-  protected onEditProduct(product: Product): void {
-    this.router.navigate([`/${ROUTES.PRODUCTS.ROOT}/${product.id}/edit`]);
-  }
-
-  protected onAskDelete(product: Product): void {
-    this.productToDelete = product;
-  }
-
-  protected onCancelDelete(): void {
-    this.productToDelete = null;
-  }
-
-  protected onConfirmDelete(): void {
-    if (!this.productToDelete) {
-      return;
-    }
-
-    this.productFacade.deleteProduct(this.productToDelete.id).subscribe({
-      next: () => {
-        this.notificationService.success('Produto removido com sucesso.');
-        this.productToDelete = null;
-      },
-      error: () => {
-        this.notificationService.error('Não foi possível remover o produto.');
-      },
-    });
+  protected onOpenProduct(product: Product): void {
+    this.router.navigate([`/${ROUTES.PRODUCTS.ROOT}/${product.id}`]);
   }
 }

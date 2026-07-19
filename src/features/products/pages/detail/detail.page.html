@@ -1,0 +1,50 @@
+@if (product$ | async; as product) {
+  <mat-card class="detail-card">
+    <div class="detail-layout">
+      <section class="media-column" aria-label="Imagem do produto">
+        <img [src]="product.image" [alt]="product.title" />
+      </section>
+
+      <section class="info-column" aria-label="Detalhes do produto">
+        <p class="category">{{ product.category }}</p>
+        <h1>{{ product.title }}</h1>
+        <p class="description">{{ product.description }}</p>
+        <p class="price">{{ product.price | currency }}</p>
+
+        <div class="actions">
+          <button mat-flat-button color="primary" type="button" (click)="onEditProduct(product.id)">
+            Editar
+          </button>
+          <button mat-stroked-button type="button" class="danger" (click)="askDelete()">
+            Excluir
+          </button>
+        </div>
+
+        <a class="back-link" mat-button [routerLink]="['/' + productsRoute]">Voltar para produtos</a>
+      </section>
+    </div>
+  </mat-card>
+
+  @if (confirmingDelete()) {
+    <div class="confirm-overlay" role="dialog" aria-modal="true" aria-label="Confirmar exclusão">
+      <app-confirm-dialog
+        title="Excluir produto"
+        message="Deseja excluir este produto?"
+        (confirm)="confirmDelete(product.id)"
+        (cancel)="cancelDelete()"
+      />
+    </div>
+  }
+} @else {
+  @if (loading$ | async) {
+    <app-loading />
+  } @else {
+    <app-empty-state
+      title="Produto não encontrado"
+      description="Esse produto pode ter sido removido ou não existe."
+    />
+    <div class="not-found-actions">
+      <a mat-button [routerLink]="['/' + productsRoute]">Voltar para produtos</a>
+    </div>
+  }
+}

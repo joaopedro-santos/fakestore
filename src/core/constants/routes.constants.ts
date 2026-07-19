@@ -4,6 +4,7 @@ export const ROUTES = {
   PRODUCTS: {
     ROOT: 'products',
     CREATE: 'new',
+    DETAIL: ':id',
     EDIT: ':id/edit',
   },
 } as const;

@@ -79,8 +79,7 @@
             @for (product of viewModel.visibleProducts; track product.id) {
               <app-product-card
                 [product]="product"
-                (editProduct)="onEditProduct($event)"
-                (deleteProduct)="onAskDelete($event)"
+                (openProduct)="onOpenProduct($event)"
               />
             }
           </div>
@@ -97,15 +96,4 @@
     </div>
 
   </mat-card-content>
-
-  @if (productToDelete) {
-    <div class="confirm-overlay" role="dialog" aria-modal="true" aria-label="Confirmar exclusão">
-      <app-confirm-dialog
-        title="Excluir produto"
-        message="Deseja excluir este produto?"
-        (confirm)="onConfirmDelete()"
-        (cancel)="onCancelDelete()"
-      />
-    </div>
-  }
 }
