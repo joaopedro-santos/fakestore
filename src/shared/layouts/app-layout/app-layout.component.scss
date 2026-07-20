@@ -7,32 +7,75 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  flex-direction: column;
+  flex-direction: row;
   padding: 0.5rem 0;
   cursor: pointer;
 
   img {
-    max-width: 100px;
+    max-width: 72px;
     min-width: 40px;
     object-fit: contain;
   }
 }
 
 .app-layout {
-  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
   background: var(--color-surface);
 }
 
+.mobile-side-menu {
+  --width: min(84vw, 320px);
+  z-index: 1500;
+}
+
+.mobile-side-menu ion-content {
+  --background: var(--color-surface-elevated);
+}
+
+.mobile-side-menu__header {
+  padding: calc(1rem + env(safe-area-inset-top)) 1rem 0.75rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.menu-item {
+  --background: transparent;
+  --color: var(--color-text);
+  --padding-start: 0.9rem;
+  --inner-padding-end: 0.9rem;
+  --border-radius: 12px;
+  margin: 0.2rem 0.6rem;
+  font-weight: 600;
+}
+
+.menu-item.is-active {
+  --background: color-mix(in srgb, var(--color-primary) 22%, transparent);
+  --color: var(--color-primary);
+}
+
+.menu-item--logout {
+  --color: var(--color-danger);
+}
+
 .app-layout__header {
+  position: relative;
+  z-index: 20;
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface-elevated);
+  padding-top: env(safe-area-inset-top);
 }
 
 .app-layout__header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   min-height: 64px;
 }
@@ -72,7 +115,14 @@
 }
 
 .app-layout__main {
-  padding: 1.5rem 0 2rem;
+  flex: 1;
+  --background: var(--color-surface);
+}
+
+.app-layout__main-content {
+  min-height: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom));
 }
 
 .brand {
@@ -129,6 +179,13 @@
 }
 
 .menu-toggle {
+  --color: var(--color-text-strong);
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: transparent;
+  --box-shadow: none;
   display: none;
   width: 46px;
   height: 46px;
@@ -139,53 +196,6 @@
   cursor: pointer;
   position: relative;
   transition: all 0.2s ease;
-}
-
-.menu-toggle span {
-  position: absolute;
-  left: 12px;
-  width: 20px;
-  height: 2px;
-  background: var(--color-text-strong);
-  border-radius: 999px;
-  transition: all 0.25s ease;
-}
-
-.menu-toggle span:nth-child(1) {
-  top: 14px;
-}
-
-.menu-toggle span:nth-child(2) {
-  top: 21px;
-}
-
-.menu-toggle span:nth-child(3) {
-  top: 28px;
-}
-
-.menu-toggle--open span:nth-child(1) {
-  top: 21px;
-  transform: rotate(45deg);
-}
-
-.menu-toggle--open span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle--open span:nth-child(3) {
-  top: 21px;
-  transform: rotate(-45deg);
-}
-
-.mobile-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(2, 6, 23, 0.55);
-
-  backdrop-filter: blur(6px);
-
-  z-index: 900;
 }
 
 .breadcrumbs {
@@ -209,8 +219,27 @@
 }
 
 @media (max-width: 840px) {
+  .app-layout__header-content {
+    align-items: center;
+    min-height: 76px;
+  }
+
+  .brand-container {
+    gap: 0.4rem;
+    padding: 0.35rem 0;
+  }
+
+  .brand-container img {
+    max-width: 54px;
+  }
+
+  .brand {
+    font-size: 1.05rem;
+  }
+
   .header-controls {
     margin-left: auto;
+    gap: 0.45rem;
   }
 
   .menu-toggle {
@@ -221,43 +250,7 @@
   }
 
   .main-nav {
-    position: fixed;
-    top: 72px;
-    left: 16px;
-    right: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 20px;
-    background: var(--color-surface-elevated);
-    box-shadow: var(--shadow-card);
-    transform: translateY(-16px);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition:
-      transform 0.25s ease,
-      opacity 0.25s ease;
-
-    z-index: 1000;
-  }
-
-  .main-nav--open {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
-  .main-nav a,
-  .logout {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 14px;
-    font-size: 1rem;
-    text-align: left;
+    display: none;
   }
 
   .main-nav a.is-active {

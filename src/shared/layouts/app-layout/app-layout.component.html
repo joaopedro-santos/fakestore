@@ -1,8 +1,59 @@
-<div class="app-layout">
+<ion-menu
+  menuId="main-mobile-menu"
+  contentId="app-layout-main-content"
+  side="start"
+  type="overlay"
+  class="mobile-side-menu"
+>
+  <ion-content>
+    <div class="mobile-side-menu__header">Menu</div>
+
+    <ion-list lines="none">
+      <ion-menu-toggle [autoHide]="true">
+        <ion-item
+          class="menu-item"
+          [routerLink]="dashboardRoute"
+          routerLinkActive="is-active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeMobileMenu()"
+        >
+          <ion-label>Dashboard</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle [autoHide]="true">
+        <ion-item
+          class="menu-item"
+          [routerLink]="productsRoute"
+          routerLinkActive="is-active"
+          (click)="closeMobileMenu()"
+        >
+          <ion-label>Produtos</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle [autoHide]="true">
+        <ion-item
+          class="menu-item"
+          [routerLink]="createProductRoute"
+          routerLinkActive="is-active"
+          (click)="closeMobileMenu()"
+        >
+          <ion-label>Novo produto</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle [autoHide]="true">
+        <ion-item class="menu-item menu-item--logout" button detail="false" (click)="logout()">
+          <ion-label>Sair</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="app-layout ion-page">
   <header class="app-layout__header">
-    @if (menuOpen()) {
-      <div class="mobile-overlay" (click)="closeMobileMenu()"></div>
-    }
     <div class="container app-layout__header-content">
       <div class="brand-container" [routerLink]="dashboardRoute" (click)="closeMobileMenu()">
         <img src="suzantur.png" alt="Suzantur Logo" srcset="" />
@@ -10,7 +61,7 @@
       </div>
 
       <div class="header-controls">
-        <div class="theme-switch" role="group" aria-label="Selecionar tema">
+        <!-- <div class="theme-switch" role="group" aria-label="Selecionar tema">
           <button
             type="button"
             class="theme-switch__button"
@@ -30,26 +81,19 @@
           >
             🌑
           </button>
-        </div>
+        </div> -->
 
-        <button
-          type="button"
+        <ion-menu-button
           class="menu-toggle"
-          [class.menu-toggle--open]="menuOpen()"
-          [attr.aria-expanded]="menuOpen()"
-          aria-controls="main-navigation"
-          (click)="toggleMobileMenu()"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+          menu="main-mobile-menu"
+          autoHide="false"
+          aria-label="Abrir menu"
+        ></ion-menu-button>
       </div>
 
       <nav
         id="main-navigation"
         class="main-nav"
-        [class.main-nav--open]="menuOpen()"
         aria-label="Navegação principal"
       >
         <a
@@ -65,13 +109,13 @@
           Produtos
         </a>
 
-        <button type="button" class="logout" (click)="logout()">[← Sair</button>
+        <button type="button" class="logout" (click)="logout()">Sair</button>
       </nav>
     </div>
   </header>
 
-  <main class="app-layout__main">
-    <div class="container">
+  <ion-content id="app-layout-main-content" [fullscreen]="false" class="app-layout__main">
+    <div class="container app-layout__main-content">
       @if (breadcrumbs$ | async; as breadcrumbs) {
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           @for (item of breadcrumbs; track item.url) {
@@ -87,5 +131,5 @@
 
       <router-outlet />
     </div>
-  </main>
+  </ion-content>
 </div>

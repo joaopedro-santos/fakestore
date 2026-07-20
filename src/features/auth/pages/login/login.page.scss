@@ -1,9 +1,12 @@
 .login-container {
-  min-height: 95vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding-top: calc(2rem + env(safe-area-inset-top));
+  padding-right: 2rem;
+  padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+  padding-left: 2rem;
 }
 
 .login-card {
@@ -61,8 +64,13 @@
   width: 100%;
 }
 
+::ng-deep .login-form .mat-mdc-form-field {
+  --mat-form-field-container-height: 56px;
+  --mat-form-field-container-vertical-padding: 12px;
+}
+
 .login-button {
-  height: 52px;
+  height: 56px;
   border-radius: 14px;
   font-size: 1rem;
   font-weight: 600;
@@ -80,7 +88,10 @@
 
 @media (max-width: 600px) {
   .login-container {
-    padding: 1rem;
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-right: 1rem;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    padding-left: 1rem;
   }
 
   .login-card {

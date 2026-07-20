@@ -1,3 +1,30 @@
-mat-card {
+.create-page-card {
   display: block;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-elevated);
+  box-shadow: var(--shadow-soft);
+}
+
+.create-page-card mat-card-actions {
+  padding: 0 1.25rem 1.25rem;
+}
+
+.create-page-card mat-card-actions a {
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  .create-page-card {
+    border-radius: 16px;
+  }
+
+  .create-page-card mat-card-actions {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  .create-page-card mat-card-actions a {
+    width: 100%;
+    min-height: 48px;
+  }
 }
