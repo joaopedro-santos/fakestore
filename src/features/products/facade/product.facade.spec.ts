@@ -3,8 +3,6 @@ import { of, throwError } from 'rxjs';
 import { ProductFacade } from './product.facade';
 import { ProductRepository } from '../../../infrastructure/repositories/product.repository';
 import { Product } from '../models/product.model';
-import { CreateProductRequest } from '../models/create-product-request.model';
-import { UpdateProductRequest } from '../models/update-product-request.model';
 
 describe('ProductFacade', () => {
   let facade: ProductFacade;
