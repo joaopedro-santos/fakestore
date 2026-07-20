@@ -11,6 +11,9 @@ import { Product } from '../../models/product.model';
 import { CreateProductRequest } from '../../models/create-product-request.model';
 import { UpdateProductRequest } from '../../models/update-product-request.model';
 import { CurrencyMaskDirective } from '../../../../shared/directives/currency-mask.directive';
+import { NotificationService } from '../../../../core/services/notification.service';
+
+const MAX_IMAGE_SIZE_BYTES = 2 * 1024 * 1024;
 
 @Component({
   selector: 'app-product-form',
@@ -32,6 +35,7 @@ import { CurrencyMaskDirective } from '../../../../shared/directives/currency-ma
 export class ProductFormComponent implements OnInit {
   private readonly formBuilder = inject(FormBuilder);
   private readonly productFacade = inject(ProductFacade);
+  private readonly notificationService = inject(NotificationService);
 
   @Input() public product: Product | null = null;
   @Output() public readonly submitForm = new EventEmitter<CreateProductRequest | UpdateProductRequest>();
@@ -48,6 +52,8 @@ export class ProductFormComponent implements OnInit {
   protected readonly categoriesLoading$ = this.productFacade.categoriesLoading$;
   protected readonly categoriesError$ = this.productFacade.categoriesError$;
   protected readonly imagePreview = signal<string | null>(null);
+  protected readonly imageSizeWarning = signal<string | null>(null);
+  protected readonly maxImageSizeLabel = '2 MB';
 
   public ngOnInit(): void {
     this.productFacade.loadCategories();
@@ -85,6 +91,19 @@ export class ProductFormComponent implements OnInit {
       return;
     }
 
+    if (file.size > MAX_IMAGE_SIZE_BYTES) {
+      const warningMessage = `A imagem excede o tamanho maximo de ${this.maxImageSizeLabel}.`;
+
+      this.imageSizeWarning.set(warningMessage);
+      this.notificationService.warning(warningMessage);
+      this.form.controls.image.markAsTouched();
+      inputElement.value = '';
+
+      return;
+    }
+
+    this.imageSizeWarning.set(null);
+
     const reader = new FileReader();
     reader.onload = () => {
       const result = reader.result;
@@ -104,6 +123,7 @@ export class ProductFormComponent implements OnInit {
 
   protected removeImage(): void {
     this.form.controls.image.setValue('');
+    this.imageSizeWarning.set(null);
     this.imagePreview.set(null);
   }
 }

@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, DestroyRef, OnInit, ViewChild, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { IonContent, IonItem, IonLabel, IonList, IonMenu, IonMenuButton, IonMenuToggle } from '@ionic/angular/standalone';
@@ -33,11 +34,14 @@ interface BreadcrumbItem {
   styleUrl: './app-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppLayoutComponent implements OnInit {
+export class AppLayoutComponent implements OnInit, AfterViewInit {
   private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly menuController = inject(MenuController);
   private readonly sessionService = inject(SessionService);
   private readonly themeService = inject(ThemeService);
+
+  @ViewChild('mainContent') private mainContent?: IonContent;
 
   protected readonly activeTheme = this.themeService.theme;
   protected readonly dashboardRoute = `/${ROUTES.DASHBOARD}`;
@@ -52,6 +56,17 @@ export class AppLayoutComponent implements OnInit {
 
   public ngOnInit(): void {
     void this.menuController.enable(true, 'main-mobile-menu');
+  }
+
+  public ngAfterViewInit(): void {
+    this.router.events
+      .pipe(
+        filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(() => {
+        void this.mainContent?.scrollToTop(0);
+      });
   }
 
   protected closeMobileMenu(): void {

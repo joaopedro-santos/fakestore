@@ -114,7 +114,7 @@
     </div>
   </header>
 
-  <ion-content id="app-layout-main-content" [fullscreen]="false" class="app-layout__main">
+  <ion-content id="app-layout-main-content" #mainContent [fullscreen]="false" class="app-layout__main">
     <div class="container app-layout__main-content">
       @if (breadcrumbs$ | async; as breadcrumbs) {
         <nav class="breadcrumbs" aria-label="Breadcrumb">

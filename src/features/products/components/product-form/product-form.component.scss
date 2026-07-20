@@ -121,6 +121,21 @@ mat-form-field {
   color: var(--color-text);
 }
 
+.image-upload__hint,
+.image-upload__warning {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.image-upload__hint {
+  color: var(--color-text-muted);
+}
+
+.image-upload__warning {
+  font-weight: 600;
+  color: var(--color-danger);
+}
+
 .image-upload input[type='file'] {
   padding: 1rem;
   border: 2px dashed var(--color-border);
@@ -128,7 +143,6 @@ mat-form-field {
   background: var(--color-surface);
   color: var(--color-text);
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
 .image-upload input[type='file']::file-selector-button {
@@ -140,11 +154,6 @@ mat-form-field {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.image-upload input[type='file']::file-selector-button:hover {
-  opacity: 0.9;
 }
 
 .image-upload input[type='file']:hover {

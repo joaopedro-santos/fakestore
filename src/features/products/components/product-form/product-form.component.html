@@ -41,12 +41,18 @@
     Imagem do produto
   </label>
 
+    <p class="image-upload__hint">Tamanho maximo permitido: {{ maxImageSizeLabel }}.</p>
+
   <input
     id="product-image"
     type="file"
     accept="image/*"
     (change)="onImageSelected($event)"
   />
+
+    @if (imageSizeWarning(); as imageSizeWarning) {
+      <p class="image-upload__warning" role="alert">{{ imageSizeWarning }}</p>
+    }
 
   @if (imagePreview()) {
     <div class="image-preview">
