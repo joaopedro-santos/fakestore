@@ -149,7 +149,7 @@
 
 .action-card a {
   min-width: 150px;
-  height: 44px;
+  height: 48px;
   border-radius: 12px;
   font-weight: 600;
 }
@@ -157,10 +157,12 @@
 @media (max-width: 768px) {
   .dashboard {
     gap: 1.25rem;
+    padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
   }
 
   .dashboard__hero {
-    padding: 1.75rem;
+    padding: 1.5rem;
+    border-radius: 18px;
   }
 
   .dashboard__hero h1 {
@@ -177,6 +179,7 @@
 
   .action-card {
     min-height: auto;
+    padding: 1.25rem;
   }
 
   .action-card mat-card-actions {

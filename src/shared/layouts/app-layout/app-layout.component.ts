@@ -1,6 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+import { IonContent, IonItem, IonLabel, IonList, IonMenu, IonMenuButton, IonMenuToggle } from '@ionic/angular/standalone';
 import { filter, map, Observable, startWith } from 'rxjs';
 import { SessionService } from '../../../core/services/session.service';
 import { ThemeMode, ThemeService } from '../../../core/services/theme.service';
@@ -14,20 +16,33 @@ interface BreadcrumbItem {
 
 @Component({
   selector: 'app-app-layout',
-  imports: [AsyncPipe, RouterLink, RouterLinkActive, RouterOutlet],
+  imports: [
+    AsyncPipe,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet,
+    IonContent,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonMenu,
+    IonMenuButton,
+    IonMenuToggle,
+  ],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppLayoutComponent {
+export class AppLayoutComponent implements OnInit {
   private readonly router = inject(Router);
+  private readonly menuController = inject(MenuController);
   private readonly sessionService = inject(SessionService);
   private readonly themeService = inject(ThemeService);
 
-  protected readonly menuOpen = signal(false);
   protected readonly activeTheme = this.themeService.theme;
   protected readonly dashboardRoute = `/${ROUTES.DASHBOARD}`;
   protected readonly productsRoute = `/${ROUTES.PRODUCTS.ROOT}`;
+  protected readonly createProductRoute = `/${ROUTES.PRODUCTS.ROOT}/${ROUTES.PRODUCTS.CREATE}`;
 
   protected readonly breadcrumbs$: Observable<BreadcrumbItem[]> = this.router.events.pipe(
     filter((event) => event instanceof NavigationEnd),
@@ -35,12 +50,12 @@ export class AppLayoutComponent {
     map(() => this.buildBreadcrumbs(this.router.url)),
   );
 
-  protected toggleMobileMenu(): void {
-    this.menuOpen.update((open) => !open);
+  public ngOnInit(): void {
+    void this.menuController.enable(true, 'main-mobile-menu');
   }
 
   protected closeMobileMenu(): void {
-    this.menuOpen.set(false);
+    void this.menuController.close('main-mobile-menu');
   }
 
   protected setTheme(theme: ThemeMode): void {

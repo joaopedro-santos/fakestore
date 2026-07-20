@@ -5,6 +5,13 @@
 @use 'styles/base/reset';
 @use 'styles/base/typography';
 @use 'styles/theme/theme';
+@import '@ionic/angular/css/core.css';
+@import '@ionic/angular/css/normalize.css';
+@import '@ionic/angular/css/structure.css';
+@import '@ionic/angular/css/typography.css';
+@import '@ionic/angular/css/display.css';
+@import '@ionic/angular/css/padding.css';
+@import '@ionic/angular/css/flex-utils.css';
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 :root {
@@ -32,6 +39,11 @@ body {
   margin: 0;
   background: var(--color-surface);
   color: var(--color-text);
+}
+
+ion-content {
+  --background: var(--color-surface);
+  --color: var(--color-text);
 }
 
 button,

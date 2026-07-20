@@ -3,12 +3,18 @@
 }
 
 .auth-layout {
-  min-height: 100vh;
+  background: var(--color-surface);
+}
+
+.auth-layout__main {
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background: var(--color-surface);
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  padding-right: 1rem;
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  padding-left: 1rem;
 }
 
 .auth-layout__content {
