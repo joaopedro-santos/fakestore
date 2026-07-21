@@ -241,14 +241,14 @@ O projeto possui Dockerfile multi-stage:
 
 ### Dashboard
 
-<img width="2558" height="1312" alt="image" src="https://github.com/user-attachments/assets/3fb540a3-d26d-45e5-960b-26c9a67b1579" />
+<img width="1558" alt="image" src="https://github.com/user-attachments/assets/3fb540a3-d26d-45e5-960b-26c9a67b1579" />
 
 ### Produtos
 
-<img width="2559" height="1308" alt="image" src="https://github.com/user-attachments/assets/3f49b047-c207-49c9-9d49-5107eb6e6897" />
-<img width="2559" height="1309" alt="image" src="https://github.com/user-attachments/assets/a95f35b8-6f8e-44a7-9bff-19fc8c51a875" />
-<img width="2559" height="1307" alt="image" src="https://github.com/user-attachments/assets/783dacd0-34e9-46d0-9026-813eac3b57cc" />
-<img width="2559" height="1312" alt="image" src="https://github.com/user-attachments/assets/b899594d-bcdb-4736-ab96-325bc5971dab" />
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/3f49b047-c207-49c9-9d49-5107eb6e6897" />
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/a95f35b8-6f8e-44a7-9bff-19fc8c51a875" />
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/783dacd0-34e9-46d0-9026-813eac3b57cc" />
+<img width="1000" alt="image" src="https://github.com/user-attachments/assets/b899594d-bcdb-4736-ab96-325bc5971dab" />
 
 ### Mobile
 <img width="231" alt="image" src="https://github.com/user-attachments/assets/728f8072-1122-43d7-95de-a65680970ae1" />
