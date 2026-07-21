@@ -246,15 +246,20 @@ O projeto possui Dockerfile multi-stage:
 ### Produtos
 
 <img width="2559" height="1308" alt="image" src="https://github.com/user-attachments/assets/3f49b047-c207-49c9-9d49-5107eb6e6897" />
+<img width="2559" height="1309" alt="image" src="https://github.com/user-attachments/assets/a95f35b8-6f8e-44a7-9bff-19fc8c51a875" />
+<img width="2559" height="1307" alt="image" src="https://github.com/user-attachments/assets/783dacd0-34e9-46d0-9026-813eac3b57cc" />
+<img width="2559" height="1312" alt="image" src="https://github.com/user-attachments/assets/b899594d-bcdb-4736-ab96-325bc5971dab" />
 
 ### Mobile
-<img width="431" height="932" alt="image" src="https://github.com/user-attachments/assets/728f8072-1122-43d7-95de-a65680970ae1" />
-<img width="431" height="933" alt="image" src="https://github.com/user-attachments/assets/f49f48cf-9989-4574-9903-fac64ebb5dc0" />
-<img width="430" height="932" alt="image" src="https://github.com/user-attachments/assets/a24a08a5-8a8f-4483-8bea-8400951e8bbc" />
-<img width="430" height="929" alt="image" src="https://github.com/user-attachments/assets/4e61d3bc-d180-4d11-bd60-486a3d627de6" />
-<img width="431" height="932" alt="image" src="https://github.com/user-attachments/assets/3bfb281c-99d8-4de6-b088-b0716d7f2597" />
-<img width="430" height="932" alt="image" src="https://github.com/user-attachments/assets/8062462a-6b9f-4a31-9fb8-26d476fde9ce" />
-<img width="430" height="932" alt="image" src="https://github.com/user-attachments/assets/2924e57b-37c1-43c0-abb5-a2efb4300750" />
+<img width="231" alt="image" src="https://github.com/user-attachments/assets/728f8072-1122-43d7-95de-a65680970ae1" />
+<img width="231" alt="image" src="https://github.com/user-attachments/assets/f49f48cf-9989-4574-9903-fac64ebb5dc0" />
+<img width="230" alt="image" src="https://github.com/user-attachments/assets/a24a08a5-8a8f-4483-8bea-8400951e8bbc" />
+<img width="230" alt="image" src="https://github.com/user-attachments/assets/4e61d3bc-d180-4d11-bd60-486a3d627de6" />
+<img width="231" alt="image" src="https://github.com/user-attachments/assets/3bfb281c-99d8-4de6-b088-b0716d7f2597" />
+<img width="230" alt="image" src="https://github.com/user-attachments/assets/8062462a-6b9f-4a31-9fb8-26d476fde9ce" />
+<img width="230" alt="image" src="https://github.com/user-attachments/assets/2924e57b-37c1-43c0-abb5-a2efb4300750" />
+<img width="231" alt="image" src="https://github.com/user-attachments/assets/ae208ab7-64aa-46a7-b258-8de96965e957" />
+
 
 
 
