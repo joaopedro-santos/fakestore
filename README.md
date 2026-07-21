@@ -237,4 +237,29 @@ O projeto possui Dockerfile multi-stage:
 1. Etapa builder com Node para gerar o build de producao.
 2. Etapa final com Nginx servindo os arquivos estaticos.
 
+## Screenshots
+
+### Dashboard
+
+<img width="2558" height="1312" alt="image" src="https://github.com/user-attachments/assets/3fb540a3-d26d-45e5-960b-26c9a67b1579" />
+
+### Produtos
+
+<img width="2559" height="1308" alt="image" src="https://github.com/user-attachments/assets/3f49b047-c207-49c9-9d49-5107eb6e6897" />
+
+### Mobile
+<img width="431" height="932" alt="image" src="https://github.com/user-attachments/assets/728f8072-1122-43d7-95de-a65680970ae1" />
+<img width="431" height="933" alt="image" src="https://github.com/user-attachments/assets/f49f48cf-9989-4574-9903-fac64ebb5dc0" />
+<img width="430" height="932" alt="image" src="https://github.com/user-attachments/assets/a24a08a5-8a8f-4483-8bea-8400951e8bbc" />
+<img width="430" height="929" alt="image" src="https://github.com/user-attachments/assets/4e61d3bc-d180-4d11-bd60-486a3d627de6" />
+<img width="431" height="932" alt="image" src="https://github.com/user-attachments/assets/3bfb281c-99d8-4de6-b088-b0716d7f2597" />
+<img width="430" height="932" alt="image" src="https://github.com/user-attachments/assets/8062462a-6b9f-4a31-9fb8-26d476fde9ce" />
+<img width="430" height="932" alt="image" src="https://github.com/user-attachments/assets/2924e57b-37c1-43c0-abb5-a2efb4300750" />
+
+
+
+
+
+
+
 Tambem existe docker-compose para facilitar subida local do container.
